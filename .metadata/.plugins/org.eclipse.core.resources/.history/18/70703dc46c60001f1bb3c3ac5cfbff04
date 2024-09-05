@@ -1,0 +1,26 @@
+package fathimaswt;
+import java.io.File;
+import org.openqa.selenium.OutputType;
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.io.FileHandler;
+
+public class Screenshot {
+
+    public static void captureScreenshot(WebDriver driver, String filename) throws Exception {
+        File screenshot = ((TakesScreenshot) driver).getScreenshotAs(OutputType.FILE);
+        String screenshotPath = "C:\\Users\\nihal\\Desktop\\fathima\\screenshots\\" + filename + ".png"; // Dynamic path and filename
+        FileHandler.copy(screenshot, new File(screenshotPath));
+    }
+
+    public static void main(String[] args) throws Exception {
+        System.setProperty("webdriver.chrome.driver", "C:\\Users\\nihal\\Desktop\\Selenium\\chromedriver.exe");
+        WebDriver driver = new ChromeDriver();
+        driver.get("https://www.facebook.com/login/");
+
+        captureScreenshot(driver, "facebook_login"); // Descriptive filename
+
+        driver.quit(); // Close the browser after capturing the screenshot
+    }
+}
+
